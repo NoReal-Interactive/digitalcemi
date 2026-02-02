@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>DIGITAL CEMÍ CONTENT</title>
+  <script type="text/javascript" src="/vendors/vendors.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .accordion-item { border: 1px solid #ccc; border-radius: 6px; margin-bottom: 10px; overflow: hidden; }
+    .accordion-header { background: #f0f0f0; padding: 10px; cursor: pointer; font-weight: bold; }
+    .accordion-content { display: none; padding: 10px; background: #fff; }
+    .accordion-content h4 { margin: 6px 0 2px; }
+    .accordion-content p { margin: 0 0 8px; }
+
+    .langs {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+    }
+    .langs button {
+        padding: 0.8rem 1.2rem;
+        border: none;
+        border-radius: 0.5rem;
+        background-color: black;
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+    }
+    .langs button:hover {
+        background-color: grey;
+    }
+    .langs button:disabled {
+      background-color: grey;
+      cursor: not-allowed;
+    }
+
+    .audio-icon img {
+      width: 1.5rem;
+      height: 1.5rem;
+      cursor: pointer;
+    }
+
+    span.article-keyword {
+        font-style: italic;
+    }
+
+  </style>
+
+  <script>
+    const speeches = [];
+
+    $(document).ready(function() {
+        
+        $("#g-accordion").on("click", ".accordion-header", function() {
+            const $content = $(this).next(".accordion-content");
+            $(".accordion-content").not($content).slideUp();
+            $content.slideToggle();
+        });
+
+        $("#h-accordion").on("click", ".accordion-header", function() {
+            const $content = $(this).next(".accordion-content");
+            $(".accordion-content").not($content).slideUp();
+            $content.slideToggle();
+        });
+
+        $(".langs button").on("click", function() {
+            $("button").prop('disabled', false);
+            $("#g-accordion").empty();
+            $("#h-accordion").empty();
+
+            let lang = $(this).attr("data-lang");
+            loadArticles(lang);
+        });
+
+        
+        
+        loadArticles("it");
+    });
+
+
+    function loadArticles(lang) {
+        let url = "assets/config_json/"+lang+"/config_json.json";
+        $.getJSON(url, function(data) {
+            data.articles.forEach(item => {
+                if(item.id == "G06") {
+                    const $item = $(`
+                        <div class="accordion-item">
+                            <div class="accordion-header">${item.id} - ${item.title}</div>
+                        </div>
+                    `);
+                    const $itemContent = $("<div class='accordion-content'></div>");
+                    const $itemTN1Content = $(`<div></div>`);
+                    const $itemTAContent = $(`<div></div>`);
+
+                    $itemTN1Content.load(item.TN1, function() {
+                        const $e = $(`<h4 data-audio='${item.audioTN1Id}'>TN1</h4>`);
+                        $itemTN1Content.prepend($e);
+                        checkAudio($e);
+                    });
+
+                    $itemTAContent.load(item.TA, function() {
+                        const $e = $(`<h4 data-audio='${item.audioTAId}'>TA</h4>`);
+                        $itemTAContent.prepend($e);
+                        checkAudio($e);
+                    });
+
+                    $itemContent.append($itemTN1Content);
+                    $itemContent.append($itemTAContent);
+
+                    $item.append($itemContent);
+                    $("#g-accordion").append($item);
+                }
+                else {
+
+                    let TN1 = item.TN1;
+                    let TN2 = item.TN2;
+                    let TA = item.TA;
+
+                    if(item.keywords) {
+                        const keywords = item.keywords.map(k => k.normalize("NFC")).sort((a, b) => b.length - a.length);
+                        const escapeRegExp = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                        const regex = new RegExp(`(?<!\\p{L})(${keywords.map(escapeRegExp).join("|")})(?!\\p{L})`,"giu");
+                        
+                        TN1 = TN1.normalize("NFC").replace(regex, '<span class="article-keyword">$1</span>');
+                        TN2 = TN2.normalize("NFC").replace(regex, '<span class="article-keyword">$1</span>');
+                        TA = TA.normalize("NFC").replace(regex, '<span class="article-keyword">$1</span>');
+                    }
+
+                    const $item = $(`
+                        <div class="accordion-item">
+                            <div class="accordion-header">${item.id} - ${item.title}</div>
+                            <div class="accordion-content">
+                            <h4 data-audio='${item.audioTN1Id}'>TN1</h4><p>${TN1}</p>
+                            <h4 data-audio='${item.audioTN2Id}'>TN2</h4><p>${TN2}</p>
+                            <h4 data-audio='${item.audioTAId}'>TA</h4><p>${TA}</p>
+                            </div>
+                        </div>
+                    `);
+                    if(item.id.startsWith("G"))
+                        $("#g-accordion").append($item);
+                    else if(item.id.startsWith("H"))
+                        $("#h-accordion").append($item);
+                }
+
+
+                $("button[data-lang='"+lang+"']").prop('disabled', true);
+
+
+
+            });
+
+            $("[data-audio]").each(function(){
+                let $e = $(this);
+                checkAudio($e);
+            });
+        });
+    }
+
+    function checkAudio($e) {
+        let audio = $e.attr("data-audio");
+        if(audio) {
+            let audioUrl = "/data/media/speeches/"+audio+".mp3";
+            $.ajax({url: audioUrl, type: "HEAD",
+                success: function() {
+                    $e.append("<span class='audio-icon'><img src='assets/icons/volume.png'><audio src='"+audioUrl+"' preload='auto'></audio><span>");
+                    $e.on("click", function() {
+                        const $audio = $(this);
+                        const $audioElem = $audio.find('audio')[0];
+                        if ($audioElem.paused) {
+                            const playPromise = $audioElem.play();
+                            if (playPromise !== undefined) {
+                                playPromise
+                                .then(() => { $audio.find('img').attr('src', 'assets/icons/pause.png');})
+                                .catch(error => {
+                                    console.error('error during audio playing:', error);
+                                });
+                            }
+                        } else {
+                            $audioElem.pause();
+                            $audio.find('img').attr('src', 'assets/icons/volume.png');
+                        }
+                    });
+                },
+                error: function() {
+                    console.log("audio not found:", audioUrl);
+                }
+            });
+        }
+    }
+
+  </script>
+</head>
+<body>
+
+    <div class="langs">
+        <button data-lang="it">ITA</button>
+        <button data-lang="en">ENG</button>
+        <button data-lang="es">ESP</button>
+    </div>
+
+    <h2>Args</h2>
+    <div id="g-accordion"></div>
+
+    <h2>Hotspots</h2>
+    <div id="h-accordion"></div>
+
+</body>
+</html>

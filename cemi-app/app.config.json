@@ -1,0 +1,12 @@
+{
+   "inactivityTime": 120000,
+   "minDistanceControls": 0.5,
+   "maxDistanceControls": 1.5,
+   "rotateSpeed": 1,
+   "showSelector": false,
+   "toggleAdaptiveDensity": false,
+   "enablePan": true,
+   "sceneSoundVolume" : 1,
+   "mode": "kiosk",
+   "surveyUrl": ""
+}

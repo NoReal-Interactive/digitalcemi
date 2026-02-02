@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "es6",
+    "rootDir": "src",
+    "outDir": "js/dist",
+    "moduleResolution": "node",
+    "strict": true,
+    "types": ["node"],
+    "lib": ["es6", "dom"],
+    "skipLibCheck": true,
+    "declaration": false, // Generalmente non necessaria se produci solo un .min.js
+    "sourceMap": false // Non necessaria per un file minificato di produzione
+  },
+  "include": [
+    "src/**/*"
+  ]
+}

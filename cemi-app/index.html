@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" href="appicon.png" sizes="512x512" type="image/png">
+
+    <!-- Add iOS meta tags and icons -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Digital Cemí">
+    <link rel="apple-touch-icon" href="appicon.png">
+
+    <!-- OpenGraph tags -->
+    <meta property="og:title" content="Digital Cemí" />
+    <meta property="og:description" content="Digital Cemí - Immersive Experience" />
+    <meta property="og:image" content="appicon.png" />
+	<meta property="og:image:secure_url" content="appicon.png" />
+	<meta property="og:image:type" content="image/png" />
+	<meta property="og:image:width" content="200" />
+	<meta property="og:image:height" content="200" />
+
+	<!-- PWA manifest -->
+	<link rel="manifest" href="app.webmanifest">
+
+	<!-- Web-app ID -->
+	<meta name="aton:appid" content="digitalcemi">
+
+	<meta name="title" content="Digital Cemí">
+	<meta name="description" content="Digital Cemí - Immersive Experience">
+
+    <!-- Add meta theme-color -->
+    <meta name="theme-color" content="#000000" />
+
+    <title>Digital Cemí</title>
+    <link rel="stylesheet" type="text/css" href="/vendors/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/res/css/main.css">
+
+    <link rel="stylesheet" type="text/css" href="assets/styles/main.css">
+    <link rel="stylesheet" type="text/css" href="assets/styles/modal.css">
+    <link rel="stylesheet" type="text/css" href="js/dist/css/swiper-bundle.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/styles/slider.css">
+    
+    <!-- Vendors -->
+    <script type="text/javascript" src="/vendors/vendors.min.js"></script>
+    <script type="text/javascript" src="/vendors/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script type="text/javascript" src="/dist/THREE.bundle.js"></script>
+    <script type="text/javascript" src="js/dist/ATON.min.js"></script>
+
+    <!-- Cemi JS -->
+    <script type="text/javascript" src="js/dist/panzoom.min.js"></script>
+    <script type="text/javascript" src="js/dist/micromodal.min.js"></script>
+    <script type="text/javascript" src="js/dist/tazebao.services.min.js"></script>
+    <script type="text/javascript" src="js/dist/swiper-bundle.min.js"></script>
+    <script type="text/javascript" src="js/dist/gsap.min.js"></script>
+    <script type="text/javascript" src="js/dist/lodash.min.js"></script>
+
+    <!--  <script type="text/javascript" src="js/dist/main.min.js"></script> -->
+    <script type="text/javascript" src="js/cemi-modal-utils.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    
+    <!-- Matomo Tag Manager
+    <script>
+        var _mtm = window._mtm = window._mtm || [];
+        _mtm.push({'mtm.startTime': (new Date().getTime()), 'event': 'mtm.Start'});
+        (function() {
+            var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+            g.async=true; g.src=''; s.parentNode.insertBefore(g,s);
+        })();
+    </script>
+    End Matomo Tag Manager -->
+
+    
+</head>
+
+<body>
+    
+    <audio id="click-sound" src="assets/audio/blop.mp3" preload="auto"></audio>
+    <audio id="scene-sound" src="assets/audio/cemi-scene.mp3" loop preload="auto"></audio>
+
+    <!-- Overlay slideshow -->
+    <div id="introOverlay">
+        <div id="introSwiper" class="swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div><img src="assets/images/intro/slide-1.jpg" alt="Slide 1" /></div>
+                </div>
+                <div class="swiper-slide">
+                    <div><img src="assets/images/intro/slide-2.jpg" alt="Slide 2" /></div>
+                </div>
+                <div class="swiper-slide">
+                    <div><img src="assets/images/intro/slide-3.jpg" alt="Slide 3" /></div>
+                </div>
+            </div>
+        </div>
+        <button id="startBtn" data-click-audio>START</button>
+    </div>
+
+    <!-- Header -->
+    <div id="cemi-header">
+        <div id="cemi-header-left">
+            <div id="title"></div>
+            <div id="subtitle"></div>
+        </div>
+        <div id="cemi-header-right">
+            <img src="assets/icons/smartphone-white.png" alt="Smartphone">
+            <img src="assets/icons/digitalcemi-qrcode.jpg" alt="QR Code">
+        </div>
+    </div>
+
+    <!-- Toolbar -->
+    <div id="cemi-toolbar">
+        <div id="languagesBtn" data-click-audio class="cemiBtn" title="Languages"><img src=""></div>
+        <div id="targetsBtn" data-click-audio class="cemiBtn" title="Target"><img src=""></div>
+        <div id="xrayBtn" data-click-audio class="cemiBtn" title="X-Ray"><img src="assets/icons/xray.png"></div>
+        <div id="argsBtn" data-click-audio class="cemiBtn" title="Arguments"><img src="assets/icons/arguments.png"></div>
+        <div id="bibliographyBtn" data-click-audio class="cemiBtn" title="Bibliography"><img src="assets/icons/biblio.png"></div>
+        <div id="creditsBtn" data-click-audio class="cemiBtn" title="Credits"><img src="assets/icons/credits.png"></div>
+        <div id="surveyBtn" data-click-audio class="cemiBtn" title="Survey"><img src="assets/icons/survey.png"></div>
+    </div>
+
+    <!-- Language Modal -->
+    <div class="micromodal-slide modal" id="languages-modal" aria-hidden="true">
+        <div id="languages-modal-overlay" class="modal__overlay" tabindex="-1" data-micromodal-close>
+            <div id="languages-modal-container" class="modal__container tools-container" role="dialog" aria-modal="true" aria-labelledby="languages-modal-title">
+                <div class="modal__content tools-content">
+                    <div class="modal__btn lang-btn" data-click-audio data-lang="it" data-label="ITA" title="Italiano"><img src="assets/icons/ITA.png"></div>
+                    <div class="modal__btn lang-btn" data-click-audio data-lang="en" data-label="ENG" title="English"><img src="assets/icons/ENG.png"></div>
+                    <div class="modal__btn lang-btn" data-click-audio data-lang="es" data-label="ESP" title="Espanol"><img src="assets/icons/ESP.png"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Target Modal -->
+    <div class="micromodal-slide modal" id="targets-modal" aria-hidden="true">
+        <div id="targets-modal-overlay" class="modal__overlay" tabindex="-1" data-micromodal-close>
+            <div id="targets-modal-container" class="modal__container tools-container" role="dialog" aria-modal="true" aria-labelledby="targets-modal-title">
+                <div class="modal__content tools-content">
+                    <div class="modal__btn target-btn" data-click-audio data-target="generic" title="Generic"><img src="assets/icons/target-adult.png"></div>
+                    <div class="modal__btn target-btn" data-click-audio data-target="children" title="Children"><img src="assets/icons/target-kid.png"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Args Modal -->
+    <div class="micromodal-slide modal" id="args-modal" aria-hidden="true">
+        <div id="args-modal-overlay" class="modal__overlay" tabindex="-1" data-micromodal-close>
+            <div id="args-modal-container" class="modal__container args-container" role="dialog" aria-modal="true" aria-labelledby="args-modal-title">
+                <div class="modal__content">
+                    <!-- links -->
+                    <div id="article-links"></div>
+                    <div class='args-close-btn' data-micromodal-close data-click-audio><img src='assets/icons/close.png'></div>
+                </div>
+                <footer class="modal__footer"></footer>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bibliography Modal -->
+    <div class="micromodal-slide modal" id="bibliography-modal" aria-hidden="true">
+        <div id="bibliography-modal-overlay" class="modal__overlay" tabindex="-1" data-micromodal-close>
+            <div id="bibliography-modal-container" class="modal__container bibliography-container" role="dialog" aria-modal="true" aria-labelledby="bibliography-modal-title">
+                <header class="modal__header">
+                    <div class="modal__title" id="bibliography-title"></div>
+                    <div class="modal-tools">
+                        <div class='modal__btn tools-btn close-btn' data-micromodal-close data-click-audio title=''><img src='assets/icons/close.png'></div>
+                    </div>
+                </header>
+                <div class="modal__content">
+                    <ul id="bibliography-list"></ul>
+                </div>
+                <footer class="modal__footer"></footer>
+            </div>
+        </div>
+    </div>
+
+    <!-- Credits Modal -->
+    <div class="micromodal-slide modal" id="credits-modal" aria-hidden="true">
+        <div id="credits-modal-overlay" class="modal__overlay" tabindex="-1" data-micromodal-close>
+            <div id="credits-modal-container" class="modal__container credits-container" role="dialog" aria-modal="true" aria-labelledby="credits-modal-title">
+                <header class="modal__header">
+                    <div class="modal__title" id="credits-title"></div>
+                    <div class="modal-tools">
+                        <div class='modal__btn tools-btn close-btn' data-micromodal-close data-click-audio title=''><img src='assets/icons/close.png'></div>
+                    </div>
+                </header>
+                <div class="modal__content">
+                    <div id="credits-banner"><img src="assets/images/credits-header.png" /></div>
+                    <div id="credits-content">
+                        <div>
+                            <p><strong>Azione finanziata dall'Unione Europea, Ministero dell'Università e della Ricerca, ItaliaDomani PNRR</strong></p>
+                            <p>Partenariato esteso <strong>CHANGES</strong> "Cultural Heritage Innovation for Next-Gen Sustainable Society"</p>
+                            <p>PE5 - Spoke 4 "Virtual Technologies for Museums and Art collections"</p>
+                            <p>(PE00000020) (Rep. n. 597/2024, Prot. n. 20105 del 24/01/2024)</p>
+                            <p>Progetto <strong>"TAZEBAO"</strong> - CUP: J33C22002850006</p>
+                        </div>
+                        <ul id="credits-list"></ul>
+                    </div>
+                </div>
+                <footer class="modal__footer"></footer>
+            </div>
+        </div>
+    </div>
+
+    <!-- Article Modal -->
+    <div class="micromodal-slide modal" id="article-modal" data-article-id ="" data-display-type="" data-parent="" aria-hidden="true">
+        <div id="article-modal-overlay" class="modal__overlay" tabindex="-1">
+            <div id="article-modal-container" class="modal__container article-container" role="dialog" aria-modal="true" aria-labelledby="article-modal-title">
+                
+                <!-- header -->
+                <header class="modal__header">
+                    <!-- title -->
+                    <div class="modal__title" id="article-title"></div>
+
+                    <!-- tools -->
+                    <div id="article-tools" class="modal-tools"></div>
+                </header>
+                
+                <!-- content -->
+                <div class="modal__content">
+                    <!-- text -->
+                    <div id="article-text" style="display: none;"></div>
+                    <!-- html -->
+                    <div id="article-html" style="display: none;"></div>
+                    
+                    <!-- media -->
+                    <div id="article-media" style="display: none;">
+                        <div id="mediaSwiper" class="swiper">
+                            <div id="article-media-gallery" class="swiper-wrapper"></div>
+                        </div>
+                    </div>
+
+                    <!-- media thumbs -->
+                    <div id="article-media-thumbs" class="swiper-container-wrapper" style="display: none; --swiper-navigation-color: black; --swiper-pagination-color: black; --swiper-navigation-size: 60">
+                        <div data-click-audio class="article-media-thumbs-prev swiper-button-prev"></div>
+                        <div id="thumbsSwiper" thumbsSlider="" class="swiper">
+                            <div id="article-media-previews" class="swiper-wrapper"></div>
+                        </div>
+                        <div data-click-audio class="article-media-thumbs-next swiper-button-next"></div>
+                    </div>
+
+                    
+
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</body>

@@ -1,0 +1,14 @@
+{
+	"name": "Digital Cemí",
+	"background_color": "#BBB",
+	"display": "fullscreen",
+	"start_url": "/",
+	"scope": "/",
+	"icons": [
+	    {
+	    "src": "appicon.png",
+	    "sizes": "512x512",
+	    "type": "image/png"
+	    }
+	]
+}
