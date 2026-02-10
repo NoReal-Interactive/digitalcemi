@@ -40,7 +40,7 @@
 		},
 		{
 			"mesh":2,
-			"name":"Zemi_Trasparente_low",
+			"name":"Cemi_Trasparente_low",
 			"translation":[
 				0.008244426921010017,
 				0.2376747727394104,
@@ -101,7 +101,7 @@
 					"ior":1.4500000476837158
 				}
 			},
-			"name":"MAT_Zemi_Trasparente",
+			"name":"MAT_Cemi_Trasparente",
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
 					"index":6
@@ -155,7 +155,7 @@
 			]
 		},
 		{
-			"name":"Zemi_Trasparente_low1",
+			"name":"Cemi_Trasparente_low1",
 			"primitives":[
 				{
 					"attributes":{
@@ -169,7 +169,7 @@
 			]
 		},
 		{
-			"name":"ZEMI_Pietra_low.001",
+			"name":"CEMI_Pietra_low.001",
 			"primitives":[
 				{
 					"attributes":{
@@ -254,8 +254,8 @@
 		},
 		{
 			"mimeType":"image/png",
-			"name":"Zemi_Gradient_Trasparenza_3",
-			"uri":"Zemi_Gradient_Trasparenza_3.png"
+			"name":"Cemi_Gradient_Trasparenza_3",
+			"uri":"Cemi_Gradient_Trasparenza_3.png"
 		},
 		{
 			"mimeType":"image/jpeg",
@@ -513,7 +513,7 @@
 	"buffers":[
 		{
 			"byteLength":9817876,
-			"uri":"Zemi_interno.bin"
+			"uri":"Cemi_interno.bin"
 		}
 	]
 }

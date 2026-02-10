@@ -15,7 +15,7 @@
 	"nodes":[
 		{
 			"mesh":0,
-			"name":"Zemi",
+			"name":"Cemi",
 			"translation":[
 				0.008244426921010017,
 				0.2376747727394104,
@@ -26,7 +26,7 @@
 	"materials":[
 		{
 			"doubleSided":true,
-			"name":"MAT_Zemi_Cotone",
+			"name":"MAT_Cemi_Cotone",
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
 					"index":0
@@ -61,8 +61,8 @@
 	"images":[
 		{
 			"mimeType":"image/jpeg",
-			"name":"Zemi_Diffuse.jpg",
-			"uri":"Zemi_Diffuse_jpg.jpg"
+			"name":"Cemi_Diffuse.jpg",
+			"uri":"Cemi_Diffuse_jpg.jpg"
 		}
 	],
 	"accessors":[
@@ -136,7 +136,7 @@
 	"buffers":[
 		{
 			"byteLength":9334300,
-			"uri":"Zemi_esterno.bin"
+			"uri":"Cemi_esterno.bin"
 		}
 	]
 }

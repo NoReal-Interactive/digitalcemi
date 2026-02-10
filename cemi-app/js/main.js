@@ -23,7 +23,7 @@ const loadOptions = {startAnimation: false};
 const nodeOptions = {updateLight: false};
 
 const cemiEsternoNodeId = "esterno";
-const cemiEsternoUrl = "models/cemi-esterno/Zemi_esterno.gltf";
+const cemiEsternoUrl = "models/cemi-esterno/Cemi_esterno.gltf";
 const cemiEsternoHotspotNodeId = "esterno-hotspots";
 const cemiEsternoHotspotConfig = [
   {id: "H01", position: new THREE.Vector3(-0.036589,0.460728,-0.054054), radius: 0.008},
@@ -34,7 +34,7 @@ const cemiEsternoHotspotConfig = [
   {id: "H06", position: new THREE.Vector3(-0.016822,0.413825,-0.179356), radius: 0.008}
 ];
 const cemiInternoNodeId = "interno";
-const cemiInternoUrl = "models/cemi-interno/Zemi_interno.gltf";
+const cemiInternoUrl = "models/cemi-interno/Cemi_interno.gltf";
 const cemiInternoHotspotNodeId = "interno-hotspots";
 const cemiInternoHotspotConfig = [
   {id: "H07", position: new THREE.Vector3(0.012092,0.278645,-0.035881), radius: 0.008},

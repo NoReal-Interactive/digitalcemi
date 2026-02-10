@@ -8,7 +8,7 @@ Developed as a web-based frontend, the application is designed for deployment ei
   <img src="./res/noreal-logo.jpg" alt="NoReal" width="250">
 </a> 
 
-**NoReal Interactive** – [Website](https://www.norealinteractive.it/)
+**No Real Interactive** – [Website](https://www.norealinteractive.it/)
 
 ## Dependencies
 This project uses the **[ATON](https://osiris.itabc.cnr.it/aton)** library to provide robust support for interactive three-dimensional model visualization.
